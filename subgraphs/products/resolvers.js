@@ -9,7 +9,7 @@ const resolvers = {
     }
   },
   Query: {
-    allProducts: (_, args, context) => {
+    products: (_, args, context) => {
       return products;
     },
     product: (_, args, context) => {

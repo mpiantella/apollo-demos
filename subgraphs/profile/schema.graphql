@@ -3,8 +3,8 @@ extend schema
         import: ["@key", "@shareable"])
 
 type Query {
-  user(id: Int): User
-  User: [User]
+  user(id: ID!): User
+  users: [User]
 }
 
 type User @key(fields: "id") {
@@ -19,5 +19,4 @@ type Address @shareable {
   city: String
   stateCode: String
   zipCode: String
-  isForeignAddress: Boolean
 }

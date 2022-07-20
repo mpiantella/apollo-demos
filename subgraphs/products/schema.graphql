@@ -3,14 +3,15 @@ extend schema
         import: ["@key", "@external", "@shareable"])
 
 type Query {
-  product: Product,
+  product(id: ID!): Product
   products: [Product]
 }
 
 type Product @key(fields: "id") {
   id: ID!
-  name: String
-  price: Int
+  title: String
+  url: String
+  description: String
   dimensions: ProductDimension
 }
 

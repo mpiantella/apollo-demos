@@ -2,13 +2,23 @@ const shippingInfo = {}
 const resolvers = {
   Query: {
     shippingInfo: (_, __) => {
-      return ;
+      return {
+        id: 1,
+        orderNumber: 2020
+      };
     }
   },
   Shipping: {
-    // TODO: self resolver
+    __resolveReference: (reference) => {
+      return {
+        id: 2,
+        orderNumber:3030
+      }
+    },
     shippingEstimate: (parent) => {
-      return dataSources.reviewsAPI.getReviewsForLocation(id);
+      return {
+        shippingEstimate: `parent.size: ${parent.size} - parent.weight: ${parent.weight}`
+      }
     }
   }
 };

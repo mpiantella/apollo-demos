@@ -10,21 +10,21 @@ type Query {
 type Shipping {
   id: ID
   orderNumber: Int
-  address: Address @external
-  dimensions: ProductDimensions @external
-  shippingEstimate: String @requires(fields: "{ dimensions { size weight } } { address { zipCode isForeignAddress } }")
+  # address: Address @external
+  # dimensions: ProductDimensions @external
+  # shippingEstimate: String @requires(fields: "{ dimensions { size weight } } { address { zipCode isForeignAddress } }")
 }
 
-type Address {
-  street1: String @external
-  street2: String @external
-  city: String @external
-  stateCode: String @external
-  zipCode: String @external
-  isForeignAddress: Boolean @external
-}
+# type Address {
+#   street1: String @external
+#   street2: String @external
+#   city: String @external
+#   stateCode: String @external
+#   zipCode: String @external
+#   isForeignAddress: Boolean @external
+# }
 
-type ProductDimensions {
-  size: String @external
-  weight: Float @external
-}
+# type ProductDimensions {
+#   size: String @external
+#   weight: Float @external
+# }
