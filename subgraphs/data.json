@@ -1,0 +1,85 @@
+{
+  "users": [{
+      "id": "user-1",
+      "email": "sam.smith@hotmail.com",
+      "name": "Sam Smith",
+      "totalProductsCreated": 2,
+      "address": {
+        "street": "1 Islington ave, Pennington, MU, 11223"
+      }
+    },
+    {
+      "id": "user-2",
+      "email": "john.doe@fmr.com",
+      "name": "John Doe",
+      "totalProductsCreated": 3
+    }
+  ],
+  "products": [{
+      "id": "1",
+      "title": "Pants",
+      "url": "http://max.name",
+      "description": "Voluptatem omnis voluptatem temporibus quia et maxime. Voluptatum omnis voluptas voluptatem ut aperiam ut optio aut. Laborum ad cum aut rerum provident. Qui aliquid impedit officia aut fugiat ut ipsam. Esse nulla culpa et magnam dolores debitis alias.",
+      "createdBy": ["sam.smith@hotmail.com"]
+    },
+    {
+      "id": "2",
+      "title": "Ball",
+      "url": "https://shayna.biz",
+      "description": "In eos sed veritatis hic excepturi fugiat nobis. Quos sint libero libero quis. Tenetur esse repellat tenetur quia itaque et ipsum. Sit deserunt nihil animi libero. Voluptates enim eius ducimus libero et tempore et quisquam inventore.",
+      "createdBy": ["sam.smith@hotmail.com"]
+    },
+    {
+      "id": "3",
+      "title": "Color",
+      "url": "https://colour.link",
+      "description": "Et magnis dis parturient montes nascetur ridiculus mus. Ut ornare lectus sit amet",
+      "createdBy": ["john.doe@fmr.com"]
+    },
+    {
+      "id": "4",
+      "title": "Mount",
+      "url": "https://mount.io",
+      "description": "Et molestie ac feugiat sed lectus vestibulum mattis ullamcorper velit.",
+      "createdBy": ["john.doe@fmr.com"]
+    },
+    {
+      "id": "5",
+      "title": "Fountain",
+      "url": "https://Fountain.ui",
+      "description": "Turpis in eu mi bibendum neque. In fermentum posuere urna nec tincidunt. ",
+      "createdBy": ["john.doe@fmr.com"]
+    }
+  ],
+  "reviews": [{
+      "id": "111",
+      "rating": 4.75,
+      "content": "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.",
+      "product": ["1"]
+    },
+    {
+      "id": "112",
+      "rating": 5.00,
+      "content": "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.",
+      "product": ["2"]
+    },
+    {
+      "id": "113",
+      "rating": 3.75,
+      "content": "Nulla facilisi nullam vehicula ipsum a arcu cursus vitae",
+      "product": ["3"]
+    },
+    {
+      "id": "114",
+      "rating": 4.75,
+      "content": "Nisi scelerisque eu ultrices vitae auctor eu augue.",
+      "product": ["4"]
+    },
+    {
+      "id": "115",
+      "rating": 4.50,
+      "content": "Et molestie ac feugiat sed lectus vestibulum mattis ullamcorper velit.",
+      "product": ["5"]
+    }
+  ]
+}

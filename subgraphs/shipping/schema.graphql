@@ -1,0 +1,30 @@
+extend schema
+  @link(url: "https://specs.apollo.dev/federation/v2.0",
+        import: ["@key", "@external", "@requires", "@shareable"])
+
+type Query {
+  "The three latest reviews submitted for FlyBy's locations"
+  shippingInfo: Shipping
+}
+
+type Shipping {
+  id: ID
+  orderNumber: Int
+  address: Address @external
+  dimensions: ProductDimensions @external
+  shippingEstimate: String @requires(fields: "{ dimensions { size weight } } { address { zipCode isForeignAddress } }")
+}
+
+type Address {
+  street1: String @external
+  street2: String @external
+  city: String @external
+  stateCode: String @external
+  zipCode: String @external
+  isForeignAddress: Boolean @external
+}
+
+type ProductDimensions {
+  size: String @external
+  weight: Float @external
+}
