@@ -15,7 +15,7 @@ type Product @key(fields: "id") {
   dimensions: ProductDimension
 }
 
-type ProductDimension @shareable {
+type ProductDimension { # @shareable ?
   size: String
   weight: Float
 }

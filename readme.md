@@ -10,15 +10,16 @@ cd subgraphs/shipping && npm i
 cd gateway/shipping && npm i 
 
 # start the subgraphs
-npm run start:subs
+npm run start:dev
 
 # 🚀 Subgraph profile running at http://localhost:5010/
 # 🚀 Subgraph products running at http://localhost:5020/
 # 🚀 Subgraph shipping running at http://localhost:5030/
 
+# exportAPOLLO_KEY=service:SECRET
 # start the gateway
 npm run start:gw
-
+# 🚀 Gateway ready at http://localhost:4000/
 ```
 
 ![Desired State](fed-2-requires.png)
@@ -35,6 +36,9 @@ query {
   }
 }
 ```
+
+Sample schema definition, utilizing [@requires](https://www.apollographql.com/docs/federation/entities-advanced#using-requires-with-object-subfields).
+
 ## Subgraph queries
 ```
 # profile subgraph

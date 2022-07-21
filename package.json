@@ -15,13 +15,12 @@
     "apollo": "^2.33.9"
   },
   "scripts": {
-    "dev": "concurrently -k npm:dev:*",
-    "start:subgraphs": "concurrently -k npm:dev:profile npm:dev:products npm:dev:shipping",
     "dev:profile": "nodemon -r esm ./subgraphs/profile/index.js",
     "dev:products": "nodemon -r esm ./subgraphs/products/index.js",
     "dev:shipping": "nodemon -r esm ./subgraphs/shipping/index.js",
-    "wait-subs": "wait-on tcp:4001 tcp:4002 tcp:4003",
-    "dev:gateway": "npm run wait-subs && nodemon -r esm ./gateway/index.js",
+    "start:dev": "concurrently -k npm:dev:*",
+    "start:gw": "npm run wait-subs && cd ./gateway && nodemon -r esm index.js",
+    "wait-subs": "wait-on tcp:5010 tcp:5020 tcp:5030",
     "publish:profile": "APOLLO_KEY=$APOLLO_KEY rover subgraph publish store-3dlkvb@current --name profile --schema ./subgraphs/profile/schema.graphql --routing-url http://localhost:5010",
     "publish:products": "APOLLO_KEY=$APOLLO_KEY rover subgraph publish store-3dlkvb@current --name products --schema ./subgraphs/products/schema.graphql --routing-url http://localhost:5020",
     "publish:shipping": "APOLLO_KEY=$APOLLO_KEY rover subgraph publish store-3dlkvb@current --name shipping --schema ./subgraphs/shipping/schema.graphql --routing-url http://localhost:5030"
