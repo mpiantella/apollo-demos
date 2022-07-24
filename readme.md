@@ -38,7 +38,6 @@ query {
 ```
 
 Sample schema definition, utilizing [@requires](https://www.apollographql.com/docs/federation/entities-advanced#using-requires-with-object-subfields).
-
 ## Subgraph queries
 ```
 # profile subgraph
