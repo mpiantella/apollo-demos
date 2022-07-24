@@ -1,35 +1,19 @@
 extend schema
   @link(url: "https://specs.apollo.dev/federation/v2.0",
-        import: [ "@key", "@external", "@shareable", "@requires"])
+        import: [ "@key", "@external", "@provides"])
 
 type Query {
-  "The three latest reviews submitted for FlyBy's locations"
-  shippingInfo: Shipping
+  allShipping: [Shipping]
+  shippingInfo(id: ID): Shipping
 }
 
 type Shipping {
   id: ID
-  orderNumber: Int
-  # dimensions: ProductDimensions @external
-  # shippingEstimate: String @requires(fields: "dimensions { size weight }") #  { address { zipCode isForeignAddress } }
-  # address: Address @external
+  content: String 
+  product: Product! @provides(fields: "description")
 }
 
-# type ProductDimensions { # @shareable ?
-#   """
-#   PENDING - Composition throws this error:
-#   WARN: The following build errors occurred:
-#   UNKNOWN: Field "Shipping.dimensions" is marked @external on all the subgraphs in which it is listed (subgraph "shipping").
-#   """
-#   size: String
-#   weight: Float
-# }
-
-# type Address {
-#   street1: String
-#   street2: String
-#   city: String @external
-#   stateCode: String @external
-#   zipCode: String @external
-#   isForeignAddress: Boolean @external
-# }
+type Product @key(fields: "id") {
+  id: ID!
+  description: String @external
+}

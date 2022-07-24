@@ -6,7 +6,6 @@
     "concurrently": "^5.1.0",
     "dotenv": "^16.0.0",
     "esm": "^3.2.25",
-    "graphql": "^15.8.0",
     "nodemon": "^2.0.2",
     "wait-on": "^4.0.1"
   },
@@ -15,15 +14,13 @@
     "apollo": "^2.33.9"
   },
   "scripts": {
-    "dev:profile": "nodemon -r esm ./subgraphs/profile/index.js",
     "dev:products": "nodemon -r esm ./subgraphs/products/index.js",
     "dev:shipping": "nodemon -r esm ./subgraphs/shipping/index.js",
     "start:dev": "concurrently -k npm:dev:*",
     "start:gw": "npm run wait-subs && cd ./gateway && nodemon -r esm index.js",
-    "wait-subs": "wait-on tcp:5010 tcp:5020 tcp:5030",
-    "publish:profile": "APOLLO_KEY=$APOLLO_KEY rover subgraph publish store-3dlkvb@current --name profile --schema ./subgraphs/profile/schema.graphql --routing-url http://localhost:5010",
-    "publish:products": "APOLLO_KEY=$APOLLO_KEY rover subgraph publish store-3dlkvb@current --name products --schema ./subgraphs/products/schema.graphql --routing-url http://localhost:5020",
-    "publish:shipping": "APOLLO_KEY=$APOLLO_KEY rover subgraph publish store-3dlkvb@current --name shipping --schema ./subgraphs/shipping/schema.graphql --routing-url http://localhost:5030"
+    "wait-subs": "wait-on tcp:5020 tcp:5030",
+    "publish:products": "APOLLO_KEY=$APOLLO_KEY rover subgraph publish store-3dlkvb@feature --name products --schema ./subgraphs/products/schema.graphql --routing-url http://localhost:5020",
+    "publish:shipping": "APOLLO_KEY=$APOLLO_KEY rover subgraph publish store-3dlkvb@feature --name shipping --schema ./subgraphs/shipping/schema.graphql --routing-url http://localhost:5030"
   },
   "keywords": [],
   "author": "",

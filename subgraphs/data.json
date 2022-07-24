@@ -1,36 +1,9 @@
 {
-  "users": [{
-      "id": "user-1",
-      "email": "sam.smith@hotmail.com",
-      "name": "Sam Smith",
-      "totalProductsCreated": 2,
-      "address": {
-        "street1": "1 Islington Ave",
-        "street2": "",
-        "city": "Pennington",
-        "stateCode": "MU",
-        "zipCode": "11223"
-      }
-    },
-    {
-      "id": "user-2",
-      "email": "john.doe@fmr.com",
-      "name": "John Doe",
-      "totalProductsCreated": 3,
-      "address": {
-        "street1": "1 Washington Street",
-        "street2": "",
-        "city": "Merrington",
-        "stateCode": "NI",
-        "zipCode": "23211"
-      }
-    }
-  ],
   "products": [{
       "id": "1",
       "title": "Pants",
       "url": "http://max.name",
-      "description": "Voluptatem omnis voluptatem temporibus quia et maxime. Voluptatum omnis voluptas voluptatem ut aperiam ut optio aut. Laborum ad cum aut rerum provident. Qui aliquid impedit officia aut fugiat ut ipsam. Esse nulla culpa et magnam dolores debitis alias.",
+      "description": "Voluptatem omnis voluptatem temporibus quia et maxime. Voluptatum omnis voluptas voluptatem ut aperiam ut optio aut. Laborum ad cum aut rerum provident",
       "dimensions": {
         "size": "s",
         "weight": 60.00
@@ -40,7 +13,7 @@
       "id": "2",
       "title": "Ball",
       "url": "https://shayna.biz",
-      "description": "In eos sed veritatis hic excepturi fugiat nobis. Quos sint libero libero quis. Tenetur esse repellat tenetur quia itaque et ipsum. Sit deserunt nihil animi libero. Voluptates enim eius ducimus libero et tempore et quisquam inventore.",
+      "description": "In eos sed veritatis hic excepturi fugiat nobis. Quos sint libero libero quis. Tenetur esse repellat tenetur quia itaque et ipsum. Sit deserunt nihil animi libero.",
       "dimensions": {
         "size": "m",
         "weight": 15.02
@@ -55,57 +28,18 @@
         "size": "m",
         "weight": 20.00
       }
-    },
-    {
-      "id": "4",
-      "title": "Mount",
-      "url": "https://mount.io",
-      "description": "Et molestie ac feugiat sed lectus vestibulum mattis ullamcorper velit.",
-      "dimensions": {
-        "size": "s",
-        "weight": 70.30
-      }
-    },
-    {
-      "id": "5",
-      "title": "Fountain",
-      "url": "https://Fountain.ui",
-      "description": "Turpis in eu mi bibendum neque. In fermentum posuere urna nec tincidunt. ",
-      "dimensions": {
-        "size": "l",
-        "weight": 6.00
-      }
     }
   ],
   "shipping": [{
       "id": "1",
-      "rating": 4.75,
       "content": "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.",
-      "product": ["1"]
+      "product": "1"
     },
     {
       "id": "2",
       "rating": 5.00,
       "content": "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.",
-      "product": ["2"]
-    },
-    {
-      "id": "3",
-      "rating": 3.75,
-      "content": "Nulla facilisi nullam vehicula ipsum a arcu cursus vitae",
-      "product": ["3"]
-    },
-    {
-      "id": "4",
-      "rating": 4.75,
-      "content": "Nisi scelerisque eu ultrices vitae auctor eu augue.",
-      "product": ["4"]
-    },
-    {
-      "id": "5",
-      "rating": 4.50,
-      "content": "Et molestie ac feugiat sed lectus vestibulum mattis ullamcorper velit.",
-      "product": ["5"]
+      "product": "2"
     }
   ]
 }

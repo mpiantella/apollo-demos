@@ -1,4 +1,6 @@
-const { products } = require('../data.json');
+const {
+  products
+} = require('../data.json');
 
 const resolvers = {
   Product: {

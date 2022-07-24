@@ -11,16 +11,5 @@ type Product @key(fields: "id") {
   id: ID!
   title: String
   url: String
-  description: String
-  dimensions: ProductDimension
-}
-
-type ProductDimension { # @shareable ?
-  size: String
-  weight: Float
-}
-
-type DeliveryEstimates {
-  estimatedDelivery: String
-  fastestDelivery: String
+  description: String @shareable 
 }
