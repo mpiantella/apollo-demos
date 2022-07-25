@@ -12,8 +12,8 @@ const resolvers = {
   User: {
     // this is called by the gateway when reviews requests location
     __resolveReference: (reference) => {
-      console.log('[profile-sub][User][__resolveReference] reference :\n', reference);
-      return users.find( u => u.id == reference.id);
+      console.log('[profile-sub][User][__resolveReference] reference :', reference);
+      return users.find(u => u.id == reference.id);
     }
   },
 };

@@ -3,22 +3,43 @@ extend schema
         import: [ "@key", "@external", "@shareable", "@requires", "@provides"])
 
 type Query {
+  """
+  This fields can resolve Product. It also returns a calculated
+  field that require User.address
+  """
   shippingInformation(id: ID!): Shipping
   "This field demonstrates @provides and how it overrides resolution"
   inStockCount(shippingId: ID!): InStockCount
 }
 
-type InStockCount {
-  product: Product! @provides(fields: "description")
-  quantity: Int!
-}
-
-type Shipping {
+type Shipping @key(fields: "id") {
   id: ID
   orderPlaced: String
   description: String
   quantity: Int!
-  product: Product 
+  product: Product
+  user: User
+  deliveryInstructions: String @requires(fields: "user { address { street1 stateCode } }")
+}
+
+# Mainly used demonstrate @requires with 3 subgraphs involved
+type User @key(fields: "id") {
+  id: ID!
+  address: Address @external
+}
+
+type Address @shareable { 
+  street1: String
+  street2: String
+  city: String
+  stateCode: String
+  zipCode: String
+}
+
+# Mainly used demonstrate @provides and simple @requires
+type InStockCount {
+  product: Product! @provides(fields: "description")
+  quantity: Int!
 }
 
 type Product @key(fields: "id") {

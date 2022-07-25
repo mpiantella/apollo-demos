@@ -1,6 +1,6 @@
 extend schema
   @link(url: "https://specs.apollo.dev/federation/v2.0",
-        import: [ "@key" ]) # "@shareable"
+        import: [ "@key", "@shareable" ])
 
 type Query {
   user(id: ID!): User
@@ -10,10 +10,10 @@ type Query {
 type User @key(fields: "id") {
   id: ID!
   name: String
-  address: Address 
+  address: Address @shareable
 }
 
-type Address { # @shareable
+type Address @shareable { 
   street1: String
   street2: String
   city: String
