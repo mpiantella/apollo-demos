@@ -1,24 +1,34 @@
-const shippingInfo = {}
+const { allShipping } = require('../data.json');
 const resolvers = {
   Query: {
-    shippingInfo: (_, __) => {
+    shippingInformation: (_, args) => {
+      console.log("[shipping-subgraph][shippingInformation] args =>", args)
+      return allShipping.find(s => s.id === args.id)
+    },
+    inStockCount: (_, args) => {
+      return allShipping.find(s => s.id === args.shippingId);
+    }
+  },
+  InStockCount: {
+    product: (root) => {
       return {
-        id: 1,
-        orderNumber: 2020
-      };
+        id: root.product.id,
+        description: root.product.description
+      }
     }
   },
   Shipping: {
-    __resolveReference: (reference) => {
-      return {
-        id: 2,
-        orderNumber:3030
-      }
-    },
-    shippingEstimate: (parent) => {
-      return {
-        shippingEstimate: `parent.size: ${parent.size} - parent.weight: ${parent.weight}`
-      }
+    product: (parent) => {
+      // The server can infer product.id without this resolver. Which component does this and what are the rules?
+      console.log("[shipping-subgraph][Shipping][product] =>", parent.product)
+      return { id: parent.product.id }
+    }
+  },
+  Product: {
+    shippingEstimate(product) {
+      console.log("[shipping-subgraph][Product][shippingEstimate] =>", product)
+      const dimensions = product.dimensions;
+      return `computeShippingEstimate(id: ${product.id}, size: ${dimensions.size}, weight; ${dimensions.weight})`;
     }
   }
 };

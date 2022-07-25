@@ -1,35 +1,34 @@
 extend schema
   @link(url: "https://specs.apollo.dev/federation/v2.0",
-        import: [ "@key", "@external", "@shareable", "@requires"])
+        import: [ "@key", "@external", "@shareable", "@requires", "@provides"])
 
 type Query {
-  "The three latest reviews submitted for FlyBy's locations"
-  shippingInfo: Shipping
+  shippingInformation(id: ID!): Shipping
+  "This field demonstrates @provides and how it overrides resolution"
+  inStockCount(shippingId: ID!): InStockCount
+}
+
+type InStockCount {
+  product: Product! @provides(fields: "description")
+  quantity: Int!
 }
 
 type Shipping {
   id: ID
-  orderNumber: Int
-  # dimensions: ProductDimensions @external
-  # shippingEstimate: String @requires(fields: "dimensions { size weight }") #  { address { zipCode isForeignAddress } }
-  # address: Address @external
+  orderPlaced: String
+  description: String
+  quantity: Int!
+  product: Product 
 }
 
-# type ProductDimensions { # @shareable ?
-#   """
-#   PENDING - Composition throws this error:
-#   WARN: The following build errors occurred:
-#   UNKNOWN: Field "Shipping.dimensions" is marked @external on all the subgraphs in which it is listed (subgraph "shipping").
-#   """
-#   size: String
-#   weight: Float
-# }
+type Product @key(fields: "id") {
+  id: ID
+  description: String @external
+  dimensions: ProductDimensions @external
+  shippingEstimate: String @requires(fields: "dimensions { size weight }")
+}
 
-# type Address {
-#   street1: String
-#   street2: String
-#   city: String @external
-#   stateCode: String @external
-#   zipCode: String @external
-#   isForeignAddress: Boolean @external
-# }
+type ProductDimensions @shareable {
+  size: String
+  weight: Float
+}

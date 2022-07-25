@@ -7,7 +7,7 @@
 cd subgraphs/products && npm i 
 cd subgraphs/profile && npm i 
 cd subgraphs/shipping && npm i
-cd gateway/shipping && npm i 
+cd gateway && npm i 
 
 # start the subgraphs
 npm run start:dev
@@ -38,61 +38,113 @@ query {
 ```
 
 Sample schema definition, utilizing [@requires](https://www.apollographql.com/docs/federation/entities-advanced#using-requires-with-object-subfields).
-## Subgraph queries
+
+## Example of @provides
+
+We can use @provides on an field resolved by another subgraph, to override their value. In this example, we have the field **Product.description**. While "description" can be resolved in the _Product_ subgraph, the _Shipping_ subgraph has its own value for it, and wants to return it for queries calling this service.
+
+Observe the query 
 ```
-# profile subgraph
-query {
-  user(id: "user-1"){
-    id
-    name
-    address {
-      street1
-      street2
-      city
-      stateCode
-      zipCode
-    }
-  }
-  users {
-    id
-    name
-     address {
-      street1
-      street2
-      city
-      stateCode
-      zipCode
+query InStockCount{
+  inStockCount(shippingId: "1") {
+    quantity
+    product {
+      id
+      description
     }
   }
 }
-# products subgraph
-query ($productId: ID!) {
-  product(id: $productId) {
-    id
-    title
-    url
-    description
-    dimensions {
-      size
-      weight
-    }
-  }
-  products {
-    id
-    title
-    url
-    description
-    dimensions {
-      size
-      weight
+// response
+{
+  "data": {
+    "inStockCount": {
+      "quantity": 100,
+      "product": {
+        "id": "1",
+        "description": "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum."
+      }
     }
   }
 }
-# shipping subgraph
-query ShippingInfo {
-  shippingInfo {
-    id
-    orderNumber
+```
+
+This yields the query plan below. It instructs the gateway that for this query, it doesn't need to invoke the _Product_ subgraph because the field is resolved here.
+
+```
+QueryPlan {
+  Fetch(service: "shipping") {
+    {
+      inStockCount(shippingId: $shippingId) {
+        quantity
+        product {
+          id
+          description
+        }
+      }
+    }
+  },
+}
+```
+
+Now the _Shipping_ subgraph doesn't return the **Product.name** for which the gateway then needs to call the _Product_ subgraph
+
+```
+query InStockCount {
+  inStockCount(shippingId: "1") {
+    quantity
+    product {
+      id
+      name
+      description
+    }
   }
+}
+//response
+{
+  "data": {
+    "inStockCount": {
+      "quantity": 100,
+      "product": {
+        "id": "1",
+        "name": "Pants",
+        "description": "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum."
+      }
+    }
+  }
+}
+```
+
+Execution plan:
+````
+QueryPlan {
+  Sequence {
+    Fetch(service: "shipping") {
+      {
+        inStockCount(shippingId: $shippingId) {
+          product {
+            __typename
+            id
+            description
+          }
+          quantity
+        }
+      }
+    },
+    Flatten(path: "inStockCount.product") {
+      Fetch(service: "products") {
+        {
+          ... on Product {
+            __typename
+            id
+          }
+        } =>
+        {
+          ... on Product {
+            name
+          }
+        }
+      },
+    },
+  },
 }
 ```
