@@ -3,7 +3,9 @@ const {ApolloGateway} = require('@apollo/gateway');
 
 require('dotenv').config();
 
-const gateway = new ApolloGateway();
+const gateway = new ApolloGateway({
+  debug: true
+});
 
 const server = new ApolloServer({
   gateway

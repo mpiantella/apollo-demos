@@ -10,12 +10,12 @@ type Query {
 type Product @key(fields: "id") {
   id: ID!
   title: String
-  url: String
-  description: String
-  dimensions: ProductDimension
+  name: String
+  description: String @shareable
+  dimensions: ProductDimensions @shareable
 }
 
-type ProductDimension { # @shareable ?
+type ProductDimensions @shareable {
   size: String
   weight: Float
 }
