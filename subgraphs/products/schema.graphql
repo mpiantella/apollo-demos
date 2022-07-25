@@ -19,8 +19,3 @@ type ProductDimensions @shareable {
   size: String
   weight: Float
 }
-
-type DeliveryEstimates {
-  estimatedDelivery: String
-  fastestDelivery: String
-}

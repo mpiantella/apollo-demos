@@ -19,14 +19,16 @@ const resolvers = {
   },
   Shipping: {
     product: (parent) => {
-      // The server can infer this without this resolver. Which component does this and what are the rules?
-      console.log("[Shipping][product] =>", parent.product)
+      // The server can infer product.id without this resolver. Which component does this and what are the rules?
+      console.log("[shipping-subgraph][Shipping][product] =>", parent.product)
       return { id: parent.product.id }
     }
   },
   Product: {
     shippingEstimate(product) {
-      return `computeShippingEstimate(id: ${product.id}, size: ${product.size}, weight; ${product.weight})`;
+      console.log("[shipping-subgraph][Product][shippingEstimate] =>", product)
+      const dimensions = product.dimensions;
+      return `computeShippingEstimate(id: ${product.id}, size: ${dimensions.size}, weight; ${dimensions.weight})`;
     }
   }
 };

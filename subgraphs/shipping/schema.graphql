@@ -24,11 +24,11 @@ type Shipping {
 type Product @key(fields: "id") {
   id: ID
   description: String @external
-  # dimensions: ProductDimensions @external
-  # shippingEstimate: String @requires(fields: "dimensions { size weight }")
+  dimensions: ProductDimensions @external
+  shippingEstimate: String @requires(fields: "dimensions { size weight }")
 }
 
-# type ProductDimensions @shareable {
-#   size: Int
-#   weight: Int
-# }
+type ProductDimensions @shareable {
+  size: String
+  weight: Float
+}
