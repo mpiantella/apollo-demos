@@ -28,12 +28,9 @@ type User @key(fields: "id") {
   address: Address @external
 }
 
-type Address @shareable { 
-  street1: String
-  street2: String
-  city: String
-  stateCode: String
-  zipCode: String
+type Address  { 
+  street1: String @external
+  stateCode: String @external
 }
 
 # Mainly used demonstrate @provides and simple @requires

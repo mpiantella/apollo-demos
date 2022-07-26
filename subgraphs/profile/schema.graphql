@@ -10,10 +10,10 @@ type Query {
 type User @key(fields: "id") {
   id: ID!
   name: String
-  address: Address @shareable
+  address: Address
 }
 
-type Address @shareable { 
+type Address { 
   street1: String
   street2: String
   city: String

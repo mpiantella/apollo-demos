@@ -1,3 +1,4 @@
+const { isCompositeType } = require('graphql');
 const { users } = require('../data.json');
 
 const resolvers = {
@@ -14,6 +15,10 @@ const resolvers = {
     __resolveReference: (reference) => {
       console.log('[profile-sub][User][__resolveReference] reference :', reference);
       return users.find(u => u.id == reference.id);
+    },
+    address: (root) => {
+      console.log('[profile-sub][User][address] root.address: ', root.address)
+      return {address: root.address};
     }
   },
 };
