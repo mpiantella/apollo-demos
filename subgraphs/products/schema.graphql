@@ -9,7 +9,6 @@ type Query {
 
 type Product @key(fields: "id") {
   id: ID!
-  title: String
   name: String
   description: String @shareable
   dimensions: ProductDimensions @shareable
@@ -18,4 +17,9 @@ type Product @key(fields: "id") {
 type ProductDimensions @shareable {
   size: String
   weight: Float
+}
+
+type Shipping @key(fields: "id") {
+  id: ID!
+  product: Product
 }

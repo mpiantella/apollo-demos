@@ -1,5 +1,6 @@
 {
-  "users": [{
+  "users": [
+    {
       "id": "user-1",
       "email": "sam.smith@hotmail.com",
       "name": "Sam Smith",
@@ -26,14 +27,15 @@
       }
     }
   ],
-  "products": [{
+  "products": [
+    {
       "id": "1",
       "name": "Pants",
       "url": "http://max.name",
       "description": "Voluptatem omnis voluptatem temporibus quia et maxime. Voluptatum omnis voluptas voluptatem ut aperiam ut optio aut. Laborum ad cum aut rerum provident. Qui aliquid impedit officia aut fugiat ut ipsam. Esse nulla culpa et magnam dolores debitis alias.",
       "dimensions": {
         "size": "s",
-        "weight": 60.00
+        "weight": 60.0
       }
     },
     {
@@ -53,16 +55,17 @@
       "description": "Et magnis dis parturient montes nascetur ridiculus mus. Ut ornare lectus sit amet",
       "dimensions": {
         "size": "m",
-        "weight": 20.00
+        "weight": 20.0
       }
     }
   ],
-  "allShipping": [{
+  "allShipping": [
+    {
       "id": "1",
       "orderPlaced": "2022-07-25T18:16:50.362Z",
       "description": "Dolore eu fugiat nulla pariatur.",
       "quantity": 100,
-      "user": "user-1",
+      "userId": "user-1",
       "product": {
         "id": "1",
         "description": "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum."
@@ -73,7 +76,7 @@
       "orderPlaced": "2022-01-14T05:00:00.000Z",
       "description": "Dolore eu fugiat nulla pariatur.",
       "quantity": 500,
-      "user": "user-2",
+      "userId": "user-2",
       "product": {
         "id": "2",
         "description": "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum."
@@ -84,7 +87,7 @@
       "orderPlaced": "2022-07-04T05:00:00.000Z",
       "description": "Nulla facilisi nullam vehicula ipsum a arcu cursus vitae",
       "quantity": 600,
-      "user": "user-3",
+      "userId": "user-3",
       "product": {
         "id": "3",
         "description": "Estu nullam vehicula ."

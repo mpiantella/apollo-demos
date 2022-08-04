@@ -12,14 +12,15 @@ type Query {
   inStockCount(shippingId: ID!): InStockCount
 }
 
-type Shipping @key(fields: "id") {
+type Shipping @key(fields: "id userId") {
   id: ID
+  userId: ID
   orderPlaced: String
   description: String
   quantity: Int!
-  product: Product
-  user: User
-  deliveryInstructions: String @requires(fields: "user { address { street1 stateCode } }")
+  user: User @external
+  deliveryInstructions: String
+    @requires(fields: "user { address { street1 stateCode } }")
 }
 
 # Mainly used demonstrate @requires with 3 subgraphs involved

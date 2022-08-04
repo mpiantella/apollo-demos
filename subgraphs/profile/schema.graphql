@@ -20,3 +20,9 @@ type Address {
   stateCode: String
   zipCode: String
 }
+
+
+type Shipping @key(fields: "userId") {
+  userId: ID!
+  user: User
+}
