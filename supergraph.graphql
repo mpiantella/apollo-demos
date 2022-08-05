@@ -1,0 +1,120 @@
+
+schema
+  @link(url: "https://specs.apollo.dev/link/v1.0")
+  @link(url: "https://specs.apollo.dev/join/v0.2", for: EXECUTION)
+{
+  query: Query
+}
+
+directive @join__field(graph: join__Graph!, requires: join__FieldSet, provides: join__FieldSet, type: String, external: Boolean, override: String, usedOverridden: Boolean) repeatable on FIELD_DEFINITION | INPUT_FIELD_DEFINITION
+
+directive @join__graph(name: String!, url: String!) on ENUM_VALUE
+
+directive @join__implements(graph: join__Graph!, interface: String!) repeatable on OBJECT | INTERFACE
+
+directive @join__type(graph: join__Graph!, key: join__FieldSet, extension: Boolean! = false, resolvable: Boolean! = true) repeatable on OBJECT | INTERFACE | UNION | ENUM | INPUT_OBJECT | SCALAR
+
+directive @link(url: String, as: String, for: link__Purpose, import: [link__Import]) repeatable on SCHEMA
+
+type Address
+  @join__type(graph: PROFILE)
+  @join__type(graph: SHIPPING)
+{
+  street1: String @join__field(graph: PROFILE) @join__field(graph: SHIPPING, external: true)
+  street2: String @join__field(graph: PROFILE)
+  city: String @join__field(graph: PROFILE)
+  stateCode: String @join__field(graph: PROFILE) @join__field(graph: SHIPPING, external: true)
+  zipCode: String @join__field(graph: PROFILE)
+}
+
+type InStockCount
+  @join__type(graph: SHIPPING)
+{
+  product: Product! @join__field(graph: SHIPPING, provides: "description")
+  quantity: Int!
+}
+
+scalar join__FieldSet
+
+enum join__Graph {
+  PRODUCTS @join__graph(name: "products", url: "http://localhost:5020/")
+  PROFILE @join__graph(name: "profile", url: "http://localhost:5010/")
+  SHIPPING @join__graph(name: "shipping", url: "http://localhost:5030/")
+}
+
+scalar link__Import
+
+enum link__Purpose {
+  """
+  `SECURITY` features provide metadata necessary to securely resolve fields.
+  """
+  SECURITY
+
+  """
+  `EXECUTION` features provide metadata necessary for operation execution.
+  """
+  EXECUTION
+}
+
+type Product
+  @join__type(graph: PRODUCTS, key: "id")
+  @join__type(graph: SHIPPING, key: "id")
+{
+  id: ID @join__field(graph: PRODUCTS, type: "ID!") @join__field(graph: SHIPPING, type: "ID")
+  name: String @join__field(graph: PRODUCTS)
+  description: String @join__field(graph: PRODUCTS) @join__field(graph: SHIPPING, external: true)
+  dimensions: ProductDimensions @join__field(graph: PRODUCTS) @join__field(graph: SHIPPING, external: true)
+  shippingEstimate: String @join__field(graph: SHIPPING, requires: "dimensions { size weight }")
+}
+
+type ProductDimensions
+  @join__type(graph: PRODUCTS)
+  @join__type(graph: SHIPPING)
+{
+  size: String
+  weight: Float
+}
+
+type Query
+  @join__type(graph: PRODUCTS)
+  @join__type(graph: PROFILE)
+  @join__type(graph: SHIPPING)
+{
+  product(id: ID!): Product @join__field(graph: PRODUCTS)
+  products: [Product] @join__field(graph: PRODUCTS)
+  user(id: ID!): User @join__field(graph: PROFILE)
+  users: [User] @join__field(graph: PROFILE)
+
+  """
+  This fields can resolve Product. It also returns a calculated
+  field that require User.address
+  """
+  shippingInformation(id: ID!): Shipping @join__field(graph: SHIPPING)
+
+  """This field demonstrates @provides and how it overrides resolution"""
+  inStockCount(shippingId: ID!): InStockCount @join__field(graph: SHIPPING)
+}
+
+type Shipping
+  @join__type(graph: PRODUCTS, key: "id")
+  @join__type(graph: PROFILE, key: "userId")
+  @join__type(graph: SHIPPING, key: "id userId")
+{
+  id: ID @join__field(graph: PRODUCTS, type: "ID!") @join__field(graph: SHIPPING, type: "ID")
+  product: Product @join__field(graph: PRODUCTS)
+  userId: ID @join__field(graph: PROFILE, type: "ID!") @join__field(graph: SHIPPING, type: "ID")
+  user: User @join__field(graph: PROFILE) @join__field(graph: SHIPPING, external: true)
+  orderPlaced: String @join__field(graph: SHIPPING)
+  description: String @join__field(graph: SHIPPING)
+  quantity: Int! @join__field(graph: SHIPPING)
+  deliveryInstructions: String @join__field(graph: SHIPPING, requires: "user { address { street1 stateCode } }")
+}
+
+type User
+  @join__type(graph: PROFILE, key: "id")
+  @join__type(graph: SHIPPING, key: "id")
+{
+  id: ID!
+  name: String @join__field(graph: PROFILE)
+  address: Address @join__field(graph: PROFILE) @join__field(graph: SHIPPING, external: true)
+}

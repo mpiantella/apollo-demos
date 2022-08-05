@@ -6,11 +6,6 @@
   "scripts": {
     "start": "nodemon ."
   },
-  "eslintConfig": {
-    "extends": [
-      "@trevorblades/eslint-config"
-    ]
-  },
   "keywords": [],
   "author": "",
   "license": "ISC",
