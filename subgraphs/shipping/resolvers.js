@@ -22,7 +22,7 @@ const resolvers = {
       console.log('[shipping-subgraph][Shipping][__resolveReference] reference => ', reference)
       const shippingInfo = allShipping.find(s => s.id === reference.id);
       console.log('[shipping-subgraph][Shipping][__resolveReference] shippingInfo',shippingInfo)
-      shippingInfo.user = reference.user;
+      shippingInfo.userAddress = reference.user;
       
       return shippingInfo
     },
@@ -37,9 +37,12 @@ const resolvers = {
     },
     // uses @requires and fetches data from User
     deliveryInstructions: (shippingInfo) => {
-      let  computerField = `Drop package at street ${shippingInfo.user.address.street1}`
-      computerField += `with state code ${shippingInfo.user.address.stateCode}`;
       console.log('[shipping-subgraph][Shipping][deliveryInstructions] shippingInfo => ', shippingInfo)
+      const street = shippingInfo.userAddress.address.street1;
+      const stateCode = shippingInfo.userAddress.address.stateCode;
+      let computerField = `Drop package at street ${street}`
+      computerField += `with state code ${stateCode}`;
+      
       return computerField;
     }
   },
