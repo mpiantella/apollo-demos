@@ -23,6 +23,7 @@ const resolvers = {
       
       const shippingInfo = allShipping.find(s => s.id === reference.id);
       shippingInfo.userAddress = reference.user.address;
+      shippingInfo.productDimensions = reference.product.dimensions;
       
       return shippingInfo
     },
@@ -40,8 +41,11 @@ const resolvers = {
       console.log('[shipping-subgraph][Shipping][deliveryInstructions] shippingInfo => ', shippingInfo)
       const street = shippingInfo.userAddress.street1;
       const stateCode = shippingInfo.userAddress.stateCode;
+      const dimensions = shippingInfo.productDimensions;
+
       let computedField = `Drop package at street ${street}`
       computedField += `with state code ${stateCode}`;
+      computedField += `with the following dimensions: size: ${dimensions.size}, weight; ${dimensions.weight})`
 
       return computedField;
     }
