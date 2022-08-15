@@ -20,8 +20,8 @@ const resolvers = {
   Shipping: {
     __resolveReference: (reference) => {
       console.log('[shipping-subgraph][Shipping][__resolveReference] reference => ', reference)
+      
       const shippingInfo = allShipping.find(s => s.id === reference.id);
-      console.log('[shipping-subgraph][Shipping][__resolveReference] shippingInfo',shippingInfo)
       shippingInfo.userAddress = reference.user.address;
       
       return shippingInfo
