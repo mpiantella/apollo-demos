@@ -20,7 +20,11 @@ const resolvers = {
   Shipping: {
     __resolveReference: (reference) => {
       console.log('[shipping-subgraph][Shipping][__resolveReference] reference => ', reference)
-      return allShipping.find(s => s.id === reference.id)
+      const shippingInfo = allShipping.find(s => s.id === reference.id);
+      console.log('[shipping-subgraph][Shipping][__resolveReference] shippingInfo',shippingInfo)
+      shippingInfo.user = reference.user;
+      
+      return shippingInfo
     },
     product: (parent) => {
       // The server can infer product.id without this resolver. Which component does this and what are the rules?
@@ -32,9 +36,11 @@ const resolvers = {
       return { id: parent.user }
     },
     // uses @requires and fetches data from User
-    deliveryInstructions: (parent) => {
-      console.log('[shipping-subgraph][Shipping][deliveryInstructions] => ', parent)
-      return 'computed fields using address from User'
+    deliveryInstructions: (shippingInfo) => {
+      let  computerField = `Drop package at street ${shippingInfo.user.address.street1}`
+      computerField += `with state code ${shippingInfo.user.address.stateCode}`;
+      console.log('[shipping-subgraph][Shipping][deliveryInstructions] shippingInfo => ', shippingInfo)
+      return computerField;
     }
   },
   Product: {

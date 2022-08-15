@@ -17,8 +17,8 @@ type Shipping @key(fields: "id") {
   orderPlaced: String
   description: String
   quantity: Int!
-  product: Product
-  user: User
+  # product: Product
+  user: User #@external
   deliveryInstructions: String @requires(fields: "user { address { street1 stateCode } }")
 }
 
