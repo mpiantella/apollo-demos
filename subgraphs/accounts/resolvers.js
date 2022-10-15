@@ -10,9 +10,7 @@ const resolvers = {
   Customer: {
     // this is called by the gateway when reviews requests location
     accounts: (customer) => {
-      console.log('customer: ' + JSON.stringify(customer))
       const accountPerCustomerId = accounts.filter((a) => a.customerId == customer.id);
-      console.log('accountPerCustomerId: ' + JSON.stringify(accountPerCustomerId))
       return accountPerCustomerId;
     }
   },
