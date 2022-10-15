@@ -12,7 +12,7 @@ const server = new ApolloServer({
 });
 
 const port = 5010;
-const subgraphName = 'profile';
+const subgraphName = 'customer';
 
 server
   .listen({port})

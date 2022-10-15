@@ -1,0 +1,22 @@
+extend schema
+  @link(url: "https://specs.apollo.dev/federation/v2.0", import: ["@key"])
+
+type Query {
+  account(id: ID!): Account
+  accounts: [Account]
+}
+
+type Account @key(fields: "id") {
+  id: ID!
+  name: String!
+  type: String!
+  balance: Float!
+  number: String!
+  institutionName: String
+  customerId: String # pattern 2
+}
+
+type Customer @key(fields: "id") {
+  id: ID!
+  accounts: [Account]
+}

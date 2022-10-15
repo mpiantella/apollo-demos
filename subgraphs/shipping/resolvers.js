@@ -22,7 +22,7 @@ const resolvers = {
       console.log('[shipping-subgraph][Shipping][__resolveReference] reference => ', reference)
       
       const shippingInfo = allShipping.find(s => s.id === reference.id);
-      shippingInfo.userAddress = reference.user.address;
+      shippingInfo.customerAddress = reference.customer.address;
       shippingInfo.productDimensions = reference.product.dimensions;
       
       return shippingInfo
@@ -32,15 +32,15 @@ const resolvers = {
       console.log('[shipping-subgraph][Shipping][product] => ', parent.product)
       return { id: parent.product.id }
     },
-    user(parent) {
-      console.log('[shipping-subgraph][Shipping][user] => ', parent.user)
-      return { id: parent.user }
+    customer(parent) {
+      console.log('[shipping-subgraph][Shipping][customer] => ', parent.customer)
+      return { id: parent.customer }
     },
-    // uses @requires and fetches data from User
+    // uses @requires and fetches data from Customer
     deliveryInstructions: (shippingInfo) => {
       console.log('[shipping-subgraph][Shipping][deliveryInstructions] shippingInfo => ', shippingInfo)
-      const street = shippingInfo.userAddress.street1;
-      const stateCode = shippingInfo.userAddress.stateCode;
+      const street = shippingInfo.customerAddress.street1;
+      const stateCode = shippingInfo.customerAddress.stateCode;
       const dimensions = shippingInfo.productDimensions;
 
       let computedField = `Drop package at street ${street}`

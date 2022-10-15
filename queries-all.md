@@ -1,8 +1,8 @@
 ## Subgraph queries
 ```
-# profile subgraph
+# customer subgraph
 query {
-  user(id: "user-1"){
+  customer(id: "customer-1"){
     id
     name
     address {
@@ -13,7 +13,7 @@ query {
       zipCode
     }
   }
-  users {
+  customers {
     id
     name
      address {
@@ -53,6 +53,33 @@ query ShippingInfo {
   shippingInfo {
     id
     orderNumber
+  }
+}
+```
+
+## Customer with accounts 
+
+```
+query Customer($customerId: ID!) {
+  customer(id: $customerId) {
+    id
+    name
+    address {
+      street1
+      street2
+      city
+      stateCode
+      zipCode
+    }
+    accounts {
+      id
+      name
+      type
+      number
+      balance
+      institutionName
+      customerId
+    }
   }
 }
 ```

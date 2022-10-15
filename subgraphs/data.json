@@ -1,6 +1,25 @@
 {
-  "users": [{
-      "id": "user-1",
+  "accounts": [{
+      "id": "1",
+      "name": "529 Plan",
+      "type": "529",
+      "balance": 1000,
+      "number": "123456789",
+      "institutionName": "Nexus Financial - via Test Connector",
+      "customerId": "customer-1"
+    },
+    {
+      "id": "2",
+      "name": "American Funds",
+      "type": "529",
+      "balance": 2416,
+      "number": "987654321",
+      "institutionName": "American Funds",
+      "customerId": "customer-2"
+    }
+  ],
+  "customers": [{
+      "id": "customer-1",
       "email": "sam.smith@hotmail.com",
       "name": "Sam Smith",
       "totalProductsCreated": 2,
@@ -13,7 +32,7 @@
       }
     },
     {
-      "id": "user-2",
+      "id": "customer-2",
       "email": "john.doe@fmr.com",
       "name": "John Doe",
       "totalProductsCreated": 3,
@@ -62,7 +81,7 @@
       "orderPlaced": "2022-07-25T18:16:50.362Z",
       "description": "Dolore eu fugiat nulla pariatur.",
       "quantity": 100,
-      "user": "user-1",
+      "customer": "customer-1",
       "product": {
         "id": "1",
         "description": "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum."
@@ -73,7 +92,7 @@
       "orderPlaced": "2022-01-14T05:00:00.000Z",
       "description": "Dolore eu fugiat nulla pariatur.",
       "quantity": 500,
-      "user": "user-2",
+      "customer": "customer-2",
       "product": {
         "id": "2",
         "description": "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum."
@@ -84,7 +103,7 @@
       "orderPlaced": "2022-07-04T05:00:00.000Z",
       "description": "Nulla facilisi nullam vehicula ipsum a arcu cursus vitae",
       "quantity": 600,
-      "user": "user-3",
+      "customer": "customer-3",
       "product": {
         "id": "3",
         "description": "Estu nullam vehicula ."

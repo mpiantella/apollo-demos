@@ -5,14 +5,14 @@
 ```
 # install subgraphs & gateway deps
 cd subgraphs/products && npm i 
-cd subgraphs/profile && npm i 
+cd subgraphs/customer && npm i 
 cd subgraphs/shipping && npm i
 cd gateway && npm i 
 
 # start the subgraphs
 npm run start:dev
 
-# 🚀 Subgraph profile running at http://localhost:5010/
+# 🚀 Subgraph customer running at http://localhost:5010/
 # 🚀 Subgraph products running at http://localhost:5020/
 # 🚀 Subgraph shipping running at http://localhost:5030/
 
@@ -32,7 +32,7 @@ query {
   shippingInfo {
     id
     orderNumber
-    shippingEstimate # query planner calls profile & products
+    shippingEstimate # query planner calls customer & products
   }
 }
 ```
