@@ -1,6 +1,8 @@
 extend schema
-  @link(url: "https://specs.apollo.dev/federation/v2.0",
-        import: ["@key", "@external", "@shareable"])
+  @link(
+    url: "https://specs.apollo.dev/federation/v2.0"
+    import: ["@key", "@external", "@shareable", "@requires"]
+  )
 
 type Query {
   product(id: ID!): Product
@@ -9,13 +11,18 @@ type Query {
 
 type Product @key(fields: "id") {
   id: ID!
-  title: String
   name: String
-  description: String @shareable
-  dimensions: ProductDimensions @shareable
+  description: String
+  dimensions: ProductDimensions
 }
 
 type ProductDimensions @shareable {
-  size: String
+  size: Float
   weight: Float
+}
+
+type Customer @key(fields: "id") {
+  id: ID!
+  profile: String @external
+  purchaseHistoryPerProfile: [Product] @requires(fields: "profile")
 }

@@ -1,47 +1,46 @@
-const { allShipping } = require('../data.json');
+const shipping = require('./shipping.json');
+
 const resolvers = {
   Query: {
-    shippingInformation: (_, args) => {
-      console.log('[shipping-subgraph][Query][shippingInformation] args => ', args)
-      return allShipping.find(s => s.id === args.id)
+    shipping: (_, args) => {
+      console.log('[shipping-subgraph][Query][shipping] args => ', args)
+      return shipping.find(s => s.id === args.id)
     },
-    inStockCount: (_, args) => {
-      return allShipping.find(s => s.id === args.shippingId);
-    }
+    // inStockCount: (_, args) => {
+    //   return shipping.find(s => s.id === args.shippingId);
+    // }
   },
-  InStockCount: {
-    product: (root) => {
-      return {
-        id: root.product.id,
-        description: root.product.description
-      }
-    }
-  },
+  // InStockCount: {
+  //   product: (root) => {
+  //     return {
+  //       id: root.product.id,
+  //       description: root.product.description
+  //     }
+  //   }
+  // },
   Shipping: {
     __resolveReference: (reference) => {
       console.log('[shipping-subgraph][Shipping][__resolveReference] reference => ', reference)
       
-      const shippingInfo = allShipping.find(s => s.id === reference.id);
-      shippingInfo.customerAddress = reference.customer.address;
-      shippingInfo.productDimensions = reference.product.dimensions;
+      const shippingReference = shipping.find(s => s.id === reference.id);
+      shippingReference.customerAddress = reference.customer.address;
+      shippingReference.productDimensions = reference.product.dimensions;
       
-      return shippingInfo
+      return shippingReference
     },
     product: (parent) => {
-      // The server can infer product.id without this resolver. Which component does this and what are the rules?
       console.log('[shipping-subgraph][Shipping][product] => ', parent.product)
-      return { id: parent.product.id }
+      return { id: parent.product }
     },
     customer(parent) {
       console.log('[shipping-subgraph][Shipping][customer] => ', parent.customer)
       return { id: parent.customer }
     },
-    // uses @requires and fetches data from Customer
-    deliveryInstructions: (shippingInfo) => {
-      console.log('[shipping-subgraph][Shipping][deliveryInstructions] shippingInfo => ', shippingInfo)
-      const street = shippingInfo.customerAddress.street1;
-      const stateCode = shippingInfo.customerAddress.stateCode;
-      const dimensions = shippingInfo.productDimensions;
+    deliveryInstructions: (shippingReference) => {
+      console.log('[shipping-subgraph][Shipping][deliveryInstructions] shippingReference => ', shippingReference)
+      const street = shippingReference.customerAddress.street1;
+      const stateCode = shippingReference.customerAddress.stateCode;
+      const dimensions = shippingReference.productDimensions;
 
       let computedField = `Drop package at street ${street}`
       computedField += `with state code ${stateCode}`;
@@ -54,7 +53,10 @@ const resolvers = {
     shippingEstimate(product) {
       console.log('[shipping-subgraph][Product][shippingEstimate] => ', product)
       const dimensions = product.dimensions;
-      return `computeShippingEstimate(id: ${product.id}, size: ${dimensions.size}, weight; ${dimensions.weight})`;
+      return {
+        message: `Product cost for id: ${product.id}, of dimensions: size: ${dimensions.size}, weight; ${dimensions.weight})`,
+        cost: Math.round(dimensions.size/1000 * dimensions.weight / 10.5, 2) // random calculation 
+      };
     }
   }
 };

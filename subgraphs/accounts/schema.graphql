@@ -1,5 +1,8 @@
 extend schema
-  @link(url: "https://specs.apollo.dev/federation/v2.0", import: ["@key"])
+  @link(
+    url: "https://specs.apollo.dev/federation/v2.0"
+    import: ["@key", "@requires", "@external"]
+  )
 
 type Query {
   account(id: ID!): Account
@@ -13,10 +16,12 @@ type Account @key(fields: "id") {
   balance: Float!
   number: String!
   institutionName: String
-  customerId: String # pattern 2
+  customerId: String
 }
 
 type Customer @key(fields: "id") {
   id: ID!
   accounts: [Account]
+  name: String @external
+  insights: [String] @requires(fields: "name")
 }

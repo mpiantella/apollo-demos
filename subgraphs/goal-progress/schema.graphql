@@ -1,0 +1,33 @@
+extend schema
+  @link(url: "https://specs.apollo.dev/federation/v2.0", import: ["@key"])
+
+type Query {
+  goalProgress(goalId: ID!): GoalProgress
+  goalProgresses: [GoalProgress]
+}
+
+# value type
+type GoalProgress {
+  goal: GoalProgressGoal!
+  progresses: [Progress]!
+}
+
+type GoalProgressGoal {
+  id: ID!
+  type: String!
+  productCode: String
+  totalAnnualContribution: Float
+  currentAssetMix: String
+}
+
+type Progress {
+  score: Float!
+  asOfDate: String
+  confidenceLevel: Float!
+}
+
+# Federation external types
+type Goal @key(fields: "id") {
+  id: ID!
+  latestGoalProgress: Progress
+}

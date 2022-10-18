@@ -1,0 +1,50 @@
+[{
+    "id": "1",
+    "name": "Pants",
+    "purchasedBy": [{
+        "id": "customer-1",
+        "profile": "p1"
+      },
+      {
+        "id": "customer-2",
+        "profile": "p1"
+      }
+    ],
+    "description": "Qui aliquid impedit officia aut fugiat ut ipsam. Esse nulla culpa et magnam dolores debitis alias.",
+    "dimensions": {
+      "size": 5760,
+      "weight": 60.00
+    }
+  },
+  {
+    "id": "2",
+    "name": "Ball",
+    "description": "In eos sed veritatis hic excepturi fugiat nobis. Quos sint libero libero quis.",
+    "purchasedBy": [{
+        "id": "customer-3",
+        "profile": "p2"
+      },
+      {
+        "id": "customer-2",
+        "profile": "p2"
+      }
+    ],
+    "dimensions": {
+      "size": 13824,
+      "weight": 15.02
+    }
+  },
+  {
+    "id": "3",
+    "name": "Color",
+    "description": "Et magnis dis parturient montes nascetur ridiculus mus. Ut ornare lectus sit amet",
+    "purchasedBy": [{
+      "id": "customer-2",
+      "profile": "p1"
+    }],
+    "dimensions": {
+      "size": 10648,
+      "weight": 20.00
+    }
+  }
+]

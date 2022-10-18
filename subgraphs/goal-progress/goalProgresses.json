@@ -1,0 +1,41 @@
+[{
+    "goal": {
+      "id": "goal-1",
+      "type": "RETIREMENT",
+      "productCode": "IGE",
+      "totalAnnualContribution": 0.0,
+      "currentAssetMix": "AGGRESSIVE_GROWTH"
+    },
+    "progresses": [{
+        "score": 91,
+        "asOfDate": "2019-07-22T14:53:02.878+0000",
+        "confidenceLevel": 0.9
+      },
+      {
+        "score": 75,
+        "asOfDate": "2019-07-22T14:53:02.878+0000",
+        "confidenceLevel": 0.3
+      }
+    ]
+  },
+  {
+    "goal": {
+      "id": "goal-1",
+      "type": "RETIREMENT",
+      "productCode": "IEG",
+      "totalAnnualContribution": 1000,
+      "currentAssetMix": "AGGRESSIVE_GROWTH"
+    },
+    "progresses": [{
+        "score": 3,
+        "asOfDate": "2022-01-01T00:00:00Z",
+        "confidenceLevel": 0.3
+      },
+      {
+        "score": 97,
+        "asOfDate": "2021-04-07T16:54:49.916+0000",
+        "confidenceLevel": 0.93
+      }
+    ]
+  }
+]

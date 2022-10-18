@@ -1,24 +1,17 @@
 extend schema
   @link(
     url: "https://specs.apollo.dev/federation/v2.0"
-    import: ["@key", "@external", "@shareable", "@requires", "@provides"]
+    import: ["@key", "@external", "@shareable", "@requires"] #  "@provides"
   )
 
 type Query {
-  """
-  This fields can resolve Product. It also returns a calculated
-  field that require Customer.address
-  """
-  shippingInformation(id: ID!): Shipping
-  "This field demonstrates @provides and how it overrides resolution"
-  inStockCount(shippingId: ID!): InStockCount
+  shipping(id: ID!): Shipping
+  # inStockCount(shippingId: ID!): InStockCount
 }
 
 type Shipping @key(fields: "id") {
   id: ID
-  orderPlaced: String
   description: String
-  quantity: Int!
   product: Product
   customer: Customer
   deliveryInstructions: String
@@ -26,8 +19,6 @@ type Shipping @key(fields: "id") {
       fields: "customer { address { street1 stateCode } } product { dimensions { size weight } }"
     )
 }
-
-# Mainly used demonstrate @requires with 3 subgraphs involved
 type Customer @key(fields: "id") {
   id: ID!
   address: Address @external
@@ -38,20 +29,26 @@ type Address {
   stateCode: String @external
 }
 
-# Mainly used demonstrate @provides and simple @requires
-type InStockCount {
-  product: Product! @provides(fields: "description")
-  quantity: Int!
-}
-
 type Product @key(fields: "id") {
   id: ID
-  description: String @external
   dimensions: ProductDimensions @external
-  shippingEstimate: String @requires(fields: "dimensions { size weight }")
+  shippingEstimate: ShippingEstimate
+    @requires(fields: "dimensions { size weight }")
 }
 
 type ProductDimensions @shareable {
-  size: String
+  size: Float
   weight: Float
 }
+
+type ShippingEstimate {
+  message: String
+  cost: Float
+}
+
+# Used to demonstrate @provides and simple @requires
+# type InStockCount {
+#   product: Product! @provides(fields: "description")
+#   quantity: Int!
+# }
+# type Product {...  description: String @external}

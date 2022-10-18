@@ -1,0 +1,37 @@
+[{
+    "id": "customer-1",
+    "profile": "p1",
+    "name": "Sam Smith",
+    "address": {
+      "street1": "1 Islington Ave",
+      "street2": "",
+      "city": "Pennington",
+      "stateCode": "MU",
+      "zipCode": "11223"
+    }
+  },
+  {
+    "id": "customer-2",
+    "profile": "p1",
+    "name": "John Doe",
+    "address": {
+      "street1": "1 Washington Street",
+      "street2": "",
+      "city": "Merrington",
+      "stateCode": "NI",
+      "zipCode": "23211"
+    }
+  },
+  {
+    "id": "customer-3",
+    "profile": "p2",
+    "name": "Anna Johnson",
+    "address": {
+      "street1": "1 Rock Ave",
+      "street2": "",
+      "city": "York",
+      "stateCode": "IV",
+      "zipCode": "87652"
+    }
+  }
+]

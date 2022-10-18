@@ -17,15 +17,19 @@
   "scripts": {
     "dev:accounts": "nodemon -r esm ./subgraphs/accounts/index.js",
     "dev:customer": "nodemon -r esm ./subgraphs/customer/index.js",
+    "dev:goals": "nodemon -r esm ./subgraphs/goals/index.js",
+    "dev:goal-progress": "nodemon -r esm ./subgraphs/goal-progress/index.js",
     "dev:products": "nodemon -r esm ./subgraphs/products/index.js",
     "dev:shipping": "nodemon -r esm ./subgraphs/shipping/index.js",
     "start:dev": "concurrently -k npm:dev:*",
     "start:gw": "npm run wait-subs && cd ./gateway && nodemon -r esm index.js",
     "wait-subs": "wait-on tcp:5010 tcp:5020 tcp:5030 tcp:5040 tcp:5050",
-    "publish:accounts": "APOLLO_KEY=$APOLLO_KEY rover subgraph publish apollo-demo-exphbq@current --name accounts --schema ./subgraphs/accounts/schema.graphql --routing-url http://localhost:5040",
-    "publish:customer": "APOLLO_KEY=$APOLLO_KEY rover subgraph publish apollo-demo-exphbq@current --name customer --schema ./subgraphs/customer/schema.graphql --routing-url http://localhost:5010",
-    "publish:products": "APOLLO_KEY=$APOLLO_KEY rover subgraph publish apollo-demo-exphbq@current --name products --schema ./subgraphs/products/schema.graphql --routing-url http://localhost:5020",
-    "publish:shipping": "APOLLO_KEY=$APOLLO_KEY rover subgraph publish apollo-demo-exphbq@current --name shipping --schema ./subgraphs/shipping/schema.graphql --routing-url http://localhost:5030"
+    "publish:accounts": "APOLLO_KEY=$APOLLO_KEY rover subgraph publish federated-patterns-azqiz --name accounts --schema ./subgraphs/accounts/schema.graphql --routing-url http://localhost:5040",
+    "publish:goals": "APOLLO_KEY=$APOLLO_KEY rover subgraph publish federated-patterns-azqiz --name goals --schema ./subgraphs/goals/schema.graphql --routing-url http://localhost:5050",
+    "publish:goal-progress": "APOLLO_KEY=$APOLLO_KEY rover subgraph publish federated-patterns-azqiz --name goal-progress --schema ./subgraphs/goal-progress/schema.graphql --routing-url http://localhost:5060",
+    "publish:customer": "APOLLO_KEY=$APOLLO_KEY rover subgraph publish federated-patterns-azqiz --name customer --schema ./subgraphs/customer/schema.graphql --routing-url http://localhost:5010",
+    "publish:products": "APOLLO_KEY=$APOLLO_KEY rover subgraph publish federated-patterns-azqiz --name products --schema ./subgraphs/products/schema.graphql --routing-url http://localhost:5020",
+    "publish:shipping": "APOLLO_KEY=$APOLLO_KEY rover subgraph publish federated-patterns-azqiz --name shipping --schema ./subgraphs/shipping/schema.graphql --routing-url http://localhost:5030"
   },
   "keywords": [],
   "author": "",

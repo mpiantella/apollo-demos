@@ -1,0 +1,19 @@
+[{
+    "id": "1",
+    "name": "529 Plan",
+    "type": "529",
+    "balance": 1000,
+    "number": "123456789",
+    "institutionName": "Nexus Financial - via Test Connector",
+    "customerId": "customer-1"
+  },
+  {
+    "id": "2",
+    "name": "American Funds",
+    "type": "529",
+    "balance": 2416,
+    "number": "987654321",
+    "institutionName": "American Funds",
+    "customerId": "customer-2"
+  }
+]

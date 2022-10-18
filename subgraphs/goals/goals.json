@@ -1,0 +1,28 @@
+[{
+    "id": "goal-1",
+    "type": "RETIREMENT",
+    "name": "RETIREMENT",
+    "startDate": "2020-01-01",
+    "endDate": "2035-12-31",
+    "targetAmount": 200000.0,
+    "savedAmount": 150000.0
+  },
+  {
+    "id": "goal-2",
+    "type": "NON_STANDARD",
+    "name": "NON_STANDARD",
+    "startDate": "2020-01-01",
+    "endDate": "2035-12-31",
+    "targetAmount": 1111,
+    "savedAmount": 11.0
+  },
+  {
+    "id": "goal-3",
+    "type": "SAVINGS",
+    "name": "Car Test",
+    "startDate": "2020-01-01",
+    "endDate": "2059-12-31",
+    "targetAmount": 8000.0,
+    "savedAmount": 3500.0
+  }
+]

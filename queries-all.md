@@ -1,8 +1,32 @@
-## Subgraph queries
+# Queries by Subgraphs and entity relationship
+
+## Accounts
 ```
-# customer subgraph
-query {
-  customer(id: "customer-1"){
+query Account {
+  account(id: "1") {
+    id
+    name
+    type
+    balance
+    number
+    institutionName
+    customerId
+  }
+  accounts {
+    id
+    name
+    type
+    balance
+    number
+    institutionName
+    customerId
+  }
+}
+```
+## Customer
+```
+query Customer {
+  customer(id: "customer-1") {
     id
     name
     address {
@@ -12,11 +36,30 @@ query {
       stateCode
       zipCode
     }
+    # contributed field from Accounts subgraph
+    accounts {
+      id
+      name
+      type
+      balance
+      number
+      institutionName
+      customerId
+    }
   }
   customers {
     id
+    accounts {
+      id
+      name
+      type
+      balance
+      number
+      institutionName
+      customerId
+    }
     name
-     address {
+    address {
       street1
       street2
       city
@@ -25,12 +68,80 @@ query {
     }
   }
 }
-# products subgraph
-query ($productId: ID!) {
-  product(id: $productId) {
+```
+## Goals
+```
+query Goals {
+  goal(id: "goal-1") {
     id
-    title
-    url
+    type
+    name
+    startDate
+    endDate
+    targetAmount
+    savedAmount
+    latestGoalProgress {
+      score
+      asOfDate
+      confidenceLevel
+    }
+  }
+  goals {
+    id
+    type
+    name
+    startDate
+    endDate
+    targetAmount
+    savedAmount
+    latestGoalProgress {
+      score
+      asOfDate
+      confidenceLevel
+    }
+  }
+}
+
+```
+## Goal Progress
+```
+query GoalProgress {
+  goalProgress(goalId: "goal-1") {
+    goal {
+      id
+      type
+      productCode
+      totalAnnualContribution
+      currentAssetMix
+    }
+    progresses {
+      score
+      asOfDate
+      confidenceLevel
+    }
+  }
+  goalProgresses {
+    goal {
+      id
+      type
+      productCode
+      totalAnnualContribution
+      currentAssetMix
+    }
+    progresses {
+      score
+      asOfDate
+      confidenceLevel
+    }
+  }
+}
+```
+## Product
+```
+query Product {
+  product(id: "1") {
+    id
+    name
     description
     dimensions {
       size
@@ -39,47 +150,23 @@ query ($productId: ID!) {
   }
   products {
     id
-    title
-    url
+    name
     description
     dimensions {
       size
       weight
     }
-  }
-}
-# shipping subgraph
-query ShippingInfo {
-  shippingInfo {
-    id
-    orderNumber
-  }
+  } 
 }
 ```
 
-## Customer with accounts 
-
+## Shipping
 ```
-query Customer($customerId: ID!) {
-  customer(id: $customerId) {
+query Shipping {
+  shipping(id: "1") {
     id
-    name
-    address {
-      street1
-      street2
-      city
-      stateCode
-      zipCode
-    }
-    accounts {
-      id
-      name
-      type
-      number
-      balance
-      institutionName
-      customerId
-    }
+    __typename
+    deliveryInstructions
   }
 }
 ```

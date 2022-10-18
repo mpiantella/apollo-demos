@@ -11,8 +11,8 @@ const server = new ApolloServer({
   schema: buildSubgraphSchema({ typeDefs, resolvers })
 });
 
-const port = 5040;
-const subgraphName = 'accounts';
+const port = 5060;
+const subgraphName = 'goal-progress';
 
 server
   .listen({port})

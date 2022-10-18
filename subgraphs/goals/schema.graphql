@@ -1,0 +1,17 @@
+extend schema
+  @link(url: "https://specs.apollo.dev/federation/v2.0", import: ["@key"])
+
+type Query {
+  goal(id: ID!): Goal
+  goals: [Goal]
+}
+
+type Goal @key(fields: "id") {
+  id: ID!
+  type: String!
+  name: String!
+  startDate: String!
+  endDate: String
+  targetAmount: Float
+  savedAmount: Float
+}

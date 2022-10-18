@@ -29,7 +29,7 @@ npm run start:gw
 ```
 # shipping subgraph
 query {
-  shippingInfo {
+  shippingReference {
     id
     orderNumber
     shippingEstimate # query planner calls customer & products
