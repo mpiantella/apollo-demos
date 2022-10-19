@@ -17,7 +17,16 @@ const resolvers = {
     }
   },
   Mutation: {
-    
+    createCustomer(parent, { input }) {
+      const newCustomer = {
+        id: "customer-" + Math.floor(Math.random() * 100),
+        name: input.name,
+        profile: input.profile || 'default',
+        address: input.address
+      };
+      customers.push(newCustomer);
+      return newCustomer;
+    },
   }
 };
 
