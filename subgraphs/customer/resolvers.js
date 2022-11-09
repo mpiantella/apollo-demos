@@ -13,6 +13,7 @@ const resolvers = {
       return customers.find(u => u.id == args.id);
     },
     customers: (root, args, context, info) => {
+      info.cacheControl.setCacheHint({ maxAge: 60, scope: 'PRIVATE' });
       return customers;
     }
   },

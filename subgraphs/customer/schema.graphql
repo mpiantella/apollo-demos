@@ -4,6 +4,17 @@ extend schema
     import: ["@key", "@shareable"]
   )
 
+enum CacheControlScope {
+  PUBLIC
+  PRIVATE
+}
+
+directive @cacheControl(
+  maxAge: Int
+  scope: CacheControlScope
+  inheritMaxAge: Boolean
+) on FIELD_DEFINITION | OBJECT | INTERFACE | UNION
+
 type Query {
   customer(id: ID!): Customer
   customers: [Customer]
@@ -13,7 +24,7 @@ type Mutation {
   createCustomer(input: CreateCustomerInput): CreateCustomerPayload
 }
 
-type Customer @key(fields: "id") {
+type Customer @key(fields: "id") @cacheControl(maxAge: 240) {
   id: ID!
   name: String
   profile: String
@@ -48,3 +59,10 @@ type CreateCustomerPayload {
   profile: String
   address: Address
 }
+
+# type Post {
+#   id: ID!
+#   title: String
+#   votes: Int @cacheControl(maxAge: 30)
+#   readByCurrentUser: Boolean! @cacheControl(maxAge: 10, scope: PRIVATE)
+# }

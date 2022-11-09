@@ -115,7 +115,7 @@ query InStockCount {
 ```
 
 Execution plan:
-````
+```
 QueryPlan {
   Sequence {
     Fetch(service: "shipping") {
@@ -148,3 +148,18 @@ QueryPlan {
   },
 }
 ```
+
+##  OpenTelemetry
+
+```
+export APOLLO_OTEL_EXPORTER_TYPE=collector
+export APOLLO_OTEL_EXPORTER_HOST=collector
+export APOLLO_OTEL_EXPORTER_PORT=4318
+```
+
+
+# Collector
+
+npm install @opentelemetry/node \
+  @opentelemetry/plugin-http \
+  @opentelemetry/plugin-express
